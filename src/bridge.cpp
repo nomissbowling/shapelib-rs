@@ -46,6 +46,7 @@ typedef struct _GrpContoursInf {
   MapContours grpScaledContours;
 } GrpContoursInf;
 
+/// dup str
 char *sdup(const char *src)
 {
   if(!src) return NULL;
@@ -192,11 +193,13 @@ ShapeC ShapeC::from(int a, int b)
   return s;
 }
 
+/// test
 int ShapeC::to_int()
 {
   return c;
 }
 
+/// test
 int c(int a, int b)
 {
   ShapeC s = ShapeC::from(a, b);

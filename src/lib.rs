@@ -1,12 +1,14 @@
-#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.1.0")]
-//! shapelib C bindings for Rust
+#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.1.1")]
+//! Rust crate shapelib-rs supports ESRI J shapefile (C bindings)
 //!
 //! # Requirements
 //!
 //! - [ OSGeo ]( https://OSGeo.org/ )
 //! - [ OSGeo shapelib (C) ]( https://github.com/OSGeo/shapelib )
+//! - [ shapelib ]( http://shapelib.maptools.org/ )
+//! - [ ESRI J shapefile ]( https://www.esrij.com/products/japan-shp/ )
 //!
-//! link shapelib.lib
+//! link shapelib_i.lib
 //!
 
 pub mod shape;

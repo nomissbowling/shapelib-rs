@@ -4,12 +4,13 @@
 //!
 //! # Requirements
 //!
-//! ./shapelib/include/shapefil.h
-//! ./shapelib/lib/shapelib_i.lib
-//! ./shapelib/bin/shapelib.dll
+//! - ./shapelib/include/shapefil.h
+//! - ./shapelib/lib/shapelib_i.lib
+//! - ./shapelib/bin/shapelib.dll
 //!
-//! ./include/bridge.hpp
-//! ./src/bridge.cpp
+//! - ./include/bridge.hpp
+//! - ./src/bridge.cpp
+//!
 
 #![allow(unused)]
 // #![allow(unused_imports)]

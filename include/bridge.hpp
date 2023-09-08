@@ -30,7 +30,9 @@ public:
 };
 
 extern "C" {
+// test
 int c(int a, int b);
+// dup str
 char *sdup(const char *src);
 }
 
