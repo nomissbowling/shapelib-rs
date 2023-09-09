@@ -35,6 +35,7 @@ typedef map<int, Contours2d> ShpContours;
 typedef vector<string> StrFields;
 typedef map<int, StrFields> RecFields;
 
+/// GrpContoursInf (C bindings)
 typedef struct _GrpContoursInf {
   Bounds4d minmax;
   ShpContours shp;

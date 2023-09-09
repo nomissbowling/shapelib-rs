@@ -5,7 +5,7 @@
 #ifndef __BRIDGE_H__
 #define __BRIDGE_H__
 
-// no more use (only for test)
+/// no more use (only for test)
 class ShapeC {
 protected:
   bool valid;
@@ -30,9 +30,9 @@ public:
 };
 
 extern "C" {
-// test
+/// test
 int c(int a, int b);
-// dup str
+/// dup str
 char *sdup(const char *src);
 }
 

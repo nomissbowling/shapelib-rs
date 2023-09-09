@@ -84,13 +84,6 @@ unsafe {
 /// V4d
 pub type V4d = [f64; 4];
 
-/// Pt
-#[derive(Debug)]
-pub struct Pt {
-  pub x: i32,
-  pub y: i32
-}
-
 /// Pt2d
 #[derive(Debug)]
 pub struct Pt2d {
@@ -100,15 +93,6 @@ pub struct Pt2d {
 
 /// Bounds4d
 pub type Bounds4d = Vec<V4d>;
-
-/// Contour2
-pub type Contour2 = Vec<Pt>;
-
-/// Contours2
-pub type Contours2 = Vec<Contour2>;
-
-/// MapContours
-pub type MapContours = BTreeMap<i32, Contours2>;
 
 /// Contour2d
 pub type Contour2d = Vec<Pt2d>;
@@ -125,40 +109,25 @@ pub type StrFields = Vec<String>;
 /// RecFields
 pub type RecFields = BTreeMap<i32, StrFields>;
 
-/// GrpContoursInf
+/// ShpContoursInf
 #[derive(Debug)]
-pub struct GrpContoursInf {
-  /// minmax
-  pub minmax: Bounds4d,
+pub struct ShpContoursInf {
   /// shp
   pub shp: ShpContours,
   /// rec
   pub rec: RecFields,
-  /// scale
-  pub scale: f64,
-  /// offset
-  pub offset: Pt2d,
-  /// mm
-  pub mm: Vec<Pt2d>,
-  /// grpContours
-  pub grpContours: Vec<usize>,
-  /// grpScaledContours
-  pub grpScaledContours: MapContours
+  /// minmax
+  pub minmax: Bounds4d
 }
 
-/// GrpContoursInf
-impl GrpContoursInf {
+/// ShpContoursInf
+impl ShpContoursInf {
   /// constructor
-  pub fn new() -> Result<GrpContoursInf, Box<dyn Error>> {
-    Ok(GrpContoursInf{
-      minmax: vec![[0.0; 4], [0.0; 4]],
+  pub fn new() -> Result<ShpContoursInf, Box<dyn Error>> {
+    Ok(ShpContoursInf{
       shp: vec![].into_iter().collect(),
       rec: vec![].into_iter().collect(),
-      scale: 0.0,
-      offset: Pt2d{x: 0.0, y: 0.0},
-      mm: vec![],
-      grpContours: vec![],
-      grpScaledContours: vec![].into_iter().collect()})
+      minmax: vec![[0.0; 4], [0.0; 4]]})
   }
 }
 
@@ -233,21 +202,21 @@ unsafe {
   }
 
   /// get_shape
-  pub fn get_shape(&self) -> Result<GrpContoursInf, Box<dyn Error>> {
+  pub fn get_shp_contours(&self) -> Result<ShpContoursInf, Box<dyn Error>> {
     if !self.valid { return Err("ShapeF is not valid".into()); }
-    let mut gci = GrpContoursInf::new()?;
+    let mut sci = ShpContoursInf::new()?;
     let mut entities = 0i32;
     let mut shape_type = 0i32;
 unsafe {
     SHPGetInfo(self.h_shp, &mut entities, &mut shape_type,
-      &mut gci.minmax[0][0], &mut gci.minmax[1][0]);
+      &mut sci.minmax[0][0], &mut sci.minmax[1][0]);
 }
 /*
     println!("SHP: entities: {}, shapeType: {}", entities, shape_type);
     println!("minBound X:{:11.6}, Y:{:11.6}, Z:{:11.6}, M:{:11.6}",
-      gci.minmax[0][0], gci.minmax[0][1], gci.minmax[0][2], gci.minmax[0][3]);
+      sci.minmax[0][0], sci.minmax[0][1], sci.minmax[0][2], sci.minmax[0][3]);
     println!("maxBound X:{:11.6}, Y:{:11.6}, Z:{:11.6}, M:{:11.6}",
-      gci.minmax[1][0], gci.minmax[1][1], gci.minmax[1][2], gci.minmax[1][3]);
+      sci.minmax[1][0], sci.minmax[1][1], sci.minmax[1][2], sci.minmax[1][3]);
 */
     for i in 0..entities {
 unsafe {
@@ -297,7 +266,7 @@ unsafe {
   }
   println!("");
 */
-        gci.rec.insert(id, flds); // always create new <k, StrFields> of rec
+        sci.rec.insert(id, flds); // always create new <k, StrFields> of rec
       }
       let mut contours = Vec::<Contour2d>::with_capacity(parts as usize);
       for n in 0..parts {
@@ -318,18 +287,18 @@ unsafe {
         contours.push(contour);
 //  println!("]");
       }
-      gci.shp.insert(id, contours); // always create new <k, Contours2d> of shp
+      sci.shp.insert(id, contours); // always create new <k, Contours2d> of shp
       SHPDestroyObject(p_shape); // SHPDestroyShape() in API manual
 }
     }
   // forget leak into_raw from_raw
-    Ok(gci)
+    Ok(sci)
   }
 }
 
 /// trait Drop
 impl Drop for ShapeF {
-  // dispose
+  /// dispose
   fn drop(&mut self) {
     self.dispose();
   }

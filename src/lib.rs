@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.1.1")]
+#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.2.0")]
 //! Rust crate shapelib-rs supports ESRI J shapefile (C bindings)
 //!
 //! # Requirements
@@ -15,7 +15,7 @@ pub mod shape;
 
 #[cfg(test)]
 mod tests {
-  use super::shape::*; // {ShapeC, c, u8zs, ShapeF};
+  use super::shape::*; // {ShapeC, c, sdup, get_pref_city, u8zs, i8zs, ShapeF};
   use std::path::PathBuf;
   use asciiz::u8z;
 
@@ -60,7 +60,7 @@ unsafe {
 }
     let shp = ShapeF::new(u, "cp932").unwrap();
     shp.disp_record_inf().unwrap();
-    let _gci = shp.get_shape().unwrap();
+    let _sci = shp.get_shp_contours().unwrap();
     drop(shp);
   }
 }

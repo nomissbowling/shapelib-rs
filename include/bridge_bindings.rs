@@ -2,6 +2,7 @@
 
 #[repr(C)]
 pub struct ShapeC__bindgen_vtable(::std::os::raw::c_void);
+#[doc = " no more use (only for test)"]
 #[repr(C)]
 #[derive(Debug)]
 pub struct ShapeC {
@@ -171,8 +172,10 @@ extern "C" {
     pub fn ShapeC_ShapeC_destructor(this: *mut ShapeC);
 }
 extern "C" {
+    #[doc = " test"]
     pub fn c(a: ::std::os::raw::c_int, b: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
 extern "C" {
+    #[doc = " dup str"]
     pub fn sdup(src: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
 }
