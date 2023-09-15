@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.2.0")]
+#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.2.1")]
 //! Rust crate shapelib-rs supports ESRI J shapefile (C bindings)
 //!
 //! # Requirements

@@ -87,7 +87,9 @@ pub type V4d = [f64; 4];
 /// Pt2d
 #[derive(Debug)]
 pub struct Pt2d {
+  /// x
   pub x: f64,
+  /// y
   pub y: f64
 }
 
