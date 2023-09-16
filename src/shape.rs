@@ -204,7 +204,8 @@ unsafe {
   }
 
   /// get_shape
-  pub fn get_shp_contours(&self) -> Result<ShpContoursInf, Box<dyn Error>> {
+  pub fn get_shp_contours(&self, ignore: bool) ->
+    Result<ShpContoursInf, Box<dyn Error>> {
     if !self.valid { return Err("ShapeF is not valid".into()); }
     let mut sci = ShpContoursInf::new()?;
     let mut entities = 0i32;
@@ -255,7 +256,7 @@ unsafe {
 //          println!("-[{}]-[{}]", j, flds[j as usize].as_str());
         }
         let (pref, city) = match get_pref_city(flds[0].as_str()) {
-        Err(e) => { println!("{} at {}\x07", e, i); (0, 0) },
+        Err(e) => { if !ignore { println!("{} at {}\x07", e, i) }; (0, 0) },
         Ok(r) => r
         };
 /*

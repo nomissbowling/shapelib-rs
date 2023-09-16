@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.2.1")]
+#![doc(html_root_url = "https://docs.rs/shapelib-rs/0.2.2")]
 //! Rust crate shapelib-rs supports ESRI J shapefile (C bindings)
 //!
 //! # Requirements
@@ -60,7 +60,7 @@ unsafe {
 }
     let shp = ShapeF::new(u, "cp932").unwrap();
     shp.disp_record_inf().unwrap();
-    let _sci = shp.get_shp_contours().unwrap();
+    let _sci = shp.get_shp_contours(false).unwrap();
     drop(shp);
   }
 }
